@@ -20,4 +20,5 @@ public class Word {
 		}
 		return output;
 	}
+	
 }

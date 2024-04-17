@@ -18,7 +18,6 @@ public class Letter {
 	public int getState() {
 		return state;
 	}
-
 	public void changeState(int state) {
 		this.state = state;
 	}
