@@ -8,8 +8,10 @@ public class Word {
 			this.word.add(new Letter(word.charAt(currentChar)));
 		}
 	}
+	
 	public String toString() {
 		String output = "";
+		
 		for(int i = 0; i < word.size(); i++) {
 			output += word.get(i).toString();
 		}

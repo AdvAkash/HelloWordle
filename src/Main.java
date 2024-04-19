@@ -3,6 +3,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		testing();
+		Keyboard keyboard = new Keyboard();
+		System.out.println(keyboard);
 	}
 	
 	public static void testing() {
