@@ -5,14 +5,16 @@ public class Main extends JFrame {
 	public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
 
-	private static volatile boolean done = false;
+	// private static volatile boolean done = false;
+
+	private JPanel gamePanel; 
 
 	public static void main(String[] args) throws InterruptedException {
 		Main theGUI = new Main();
 		SwingUtilities.invokeLater(() -> theGUI.createFrame(theGUI));
-		synchronized (theGUI) {
-            theGUI.wait();
-        }
+		// synchronized (theGUI) {
+        //     theGUI.wait();
+        // }
 
 
 		testing();
@@ -31,10 +33,9 @@ public class Main extends JFrame {
 
         // The JFrame has a menu attached to it
         // addMenuBar();
-
-		GamePanel gamePanel = new GamePanel();
+		gamePanel = new GamePanel();
 		gamePanel.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
-		add(gamePanel);
+		this.add(gamePanel);
 		gamePanel.setVisible(false); 
 
         // Set this JFrame to be visible
@@ -43,9 +44,9 @@ public class Main extends JFrame {
         System.out.println("All done creating our frame");
         // tell the main thread that we are done creating our dialogs.
         // This allows the main thread to stop wait()'ing.
-        synchronized (semaphore) {
-            semaphore.notify();
-        }
+        // synchronized (semaphore) {
+        //     semaphore.notify();
+        // }
     }
 	
 	public static void testing() {
