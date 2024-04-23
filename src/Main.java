@@ -9,7 +9,7 @@ public class Main extends JFrame {
 
 	private JPanel gamePanel; 
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		Main theGUI = new Main();
 		SwingUtilities.invokeLater(() -> theGUI.createFrame(theGUI));
 		// synchronized (theGUI) {
@@ -32,7 +32,8 @@ public class Main extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // The JFrame has a menu attached to it
-        // addMenuBar();
+        addMenuBar();
+
 		gamePanel = new GamePanel();
 		gamePanel.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 		this.add(gamePanel);
@@ -52,6 +53,28 @@ public class Main extends JFrame {
 	public static void testing() {
 		Word testWord = new Word("Akash");
 		System.out.println(testWord);
+	}
+
+	private void addMenuBar() {
+
+		JMenuBar bar = new JMenuBar();
+		// Add the menu bar to the JFrame
+		this.setJMenuBar(bar);
+	
+		// Add more top-level menu options for the specific animation panel
+		JMenu menu = new JMenu("Options");
+		menu.setMnemonic('O');
+	
+		JMenu submenu = new JMenu("Mode");
+		submenu.setMnemonic('M');
+
+		JMenuItem item  = new JMenuItem("Regular", 'R');
+		submenu.add(item);
+		item  = new JMenuItem("Trick", 'T');
+		submenu.add(item);
+		menu.add(submenu);
+
+		bar. add(menu);
 	}
 
 }
