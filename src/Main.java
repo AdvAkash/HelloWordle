@@ -2,20 +2,14 @@ import javax.swing.*;
 
 public class Main extends JFrame {
 
-	public static final int WIDTH = 800;
+	public static final int WIDTH = 450;
     public static final int HEIGHT = 800;
-
-	// private static volatile boolean done = false;
 
 	private JPanel gamePanel; 
 
 	public static void main(String[] args) {
 		Main theGUI = new Main();
 		SwingUtilities.invokeLater(() -> theGUI.createFrame(theGUI));
-		// synchronized (theGUI) {
-        //     theGUI.wait();
-        // }
-
 
 		testing();
 		Keyboard keyboard = new Keyboard();
@@ -37,7 +31,7 @@ public class Main extends JFrame {
 		gamePanel = new GamePanel();
 		gamePanel.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 		this.add(gamePanel);
-		gamePanel.setVisible(false); 
+		gamePanel.setVisible(true); 
 
         // Set this JFrame to be visible
         this.setVisible(true);
@@ -70,11 +64,11 @@ public class Main extends JFrame {
 
 		JMenuItem item  = new JMenuItem("Regular", 'R');
 		submenu.add(item);
-		item  = new JMenuItem("Trick", 'T');
+		item = new JMenuItem("Trick", 'T');
 		submenu.add(item);
 		menu.add(submenu);
 
-		bar. add(menu);
+		bar.add(menu);
 	}
 
 }
