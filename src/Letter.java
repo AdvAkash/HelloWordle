@@ -9,6 +9,10 @@ public class Letter {
 	 * 3 - found
 	 */
 	private int state;
+
+	public Letter() {
+		
+	}
 	
 	public Letter(char letter) {
 		this.setLetter(letter);
