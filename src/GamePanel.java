@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.Color;
+
 import java.awt.event.*;
 import java.awt.*;
 
@@ -7,8 +7,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
     //private static final int HEADER_SIZE = Main.getSize().WIDTH;
     private Letter[][] grid;
-    public static final int ROW = 5;
-    public static final int COL = 6;
+    public static final int ROW = 6;
+    public static final int COL = 5;
     public static final int SIZE = 100;
 
     public GamePanel() {
@@ -26,10 +26,10 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void createGrid() {
-        grid = new Letter[ROW][COL];
-        for (int row = 0; row < ROW; row++) {
-            for (int col = 0; col < COL; col++) {
-                grid[row][col] = new Letter(); 
+        grid = new Letter[COL][ROW];
+        for (int col = 0; col < COL; col++) {
+            for (int row = 0; row < ROW; row++) {
+                grid[col][row] = new Letter(); 
             }
         }
     }
@@ -45,9 +45,10 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public static void drawBoard(Graphics g) {
-        for (int row = 0; row < ROW; row++) {
-            for (int col = 0; col < COL; col++) {
-                g.drawRect(1000 + row * SIZE, col * SIZE, SIZE, SIZE);
+        int offset = 10 ;
+        for (int col = 0; col < COL; col++) {
+            for (int row = 0; row < ROW; row++) {
+                g.drawRect(473 + col * (offset + SIZE),  150 + row * (offset + SIZE),  SIZE, SIZE);
             }
         }
     }
