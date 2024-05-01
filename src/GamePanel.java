@@ -20,7 +20,6 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void createHeader() {
-        
     }
 
     public void createGrid() {
@@ -28,6 +27,6 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
+        
     }
 }

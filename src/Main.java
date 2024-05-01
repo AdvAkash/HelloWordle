@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.Scanner;
 
 public class Main extends JFrame {
 
@@ -11,9 +12,22 @@ public class Main extends JFrame {
 		Main theGUI = new Main();
 		SwingUtilities.invokeLater(() -> theGUI.createFrame(theGUI));
 
-		testing();
 		Keyboard keyboard = new Keyboard();
 		System.out.println(keyboard);
+		Word targetWord = new Word("codes");
+		System.out.println(targetWord);
+		Scanner console = new Scanner(System.in);
+		String input;
+		Word guess;
+		for(int i = 0; i <= 5; i++) {
+			input = console.nextLine();
+			guess = new Word(input);
+			System.out.println(guess);
+			
+			guess.check(targetWord);
+			System.out.println(guess);
+		}
+		console.close();
 	}
 
 	public void createFrame(Object semaphore) {
@@ -43,11 +57,6 @@ public class Main extends JFrame {
         //     semaphore.notify();
         // }
     }
-	
-	public static void testing() {
-		Word testWord = new Word("Akash");
-		System.out.println(testWord);
-	}
 
 	private void addMenuBar() {
 
