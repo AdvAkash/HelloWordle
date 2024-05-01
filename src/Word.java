@@ -10,6 +10,10 @@ public class Word {
 		}
 	}
 
+	public Word(){ 
+		
+	}
+
 	public ArrayList<Letter> getLetters() {
 		return word;
 	}

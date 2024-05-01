@@ -23,7 +23,6 @@ public class Main extends JFrame {
 			input = console.nextLine();
 			guess = new Word(input);
 			System.out.println(guess);
-			
 			guess.check(targetWord);
 			System.out.println(guess);
 		}
