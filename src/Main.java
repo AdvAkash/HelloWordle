@@ -19,7 +19,7 @@ public class Main extends JFrame {
 		Scanner console = new Scanner(System.in);
 		String input;
 		Word guess;
-		for(int i = 0; i <= 5; i++) {
+		for(int i = 0; i <= 4; i++) {
 			input = console.nextLine();
 			guess = new Word(input);
 			System.out.println(guess);
