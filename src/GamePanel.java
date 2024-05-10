@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public GamePanel() {
         createComponents();
+        
     }
 
     public void createComponents() {
@@ -26,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
         createGrid();
         updateGrid("AKASH");
         updateGrid("HELLO");
-        updateGrid("WORLD");
+        updateGrid("WORLD");    
     }
 
     public void createHeader() {
@@ -85,7 +86,7 @@ public class GamePanel extends JPanel implements ActionListener {
         System.out.println(word);
 
         int index = 0;
-        for (int row = 0 + OFFSET; row < ROW ; row++) {
+        for (int row = 0 + OFFSET; row < ROW; row++) {
             for (int col = 0; col < COL; col++) {
                 grid[row][col] = word.get(index);
                 index++;
@@ -105,6 +106,14 @@ public class GamePanel extends JPanel implements ActionListener {
             }
             System.out.println(); // Move to the next line after printing each row
         }
+    }
+
+    public void setHeight(int height) {
+
+    }
+
+    public void setWidth() {
+
     }
 
 
