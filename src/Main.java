@@ -46,12 +46,13 @@ public class Main extends JFrame {
 		this.add(gamePanel);
 		System.out.println("BOY: " + gamePanel.getHeight());
 		gamePanel.setVisible(true); 
-		System.out.println("BOY: " + gamePanel.getHeight());
+		System.out.println("BOY: " + gamePanel.getWidth());
 		
 
         // Set this JFrame to be visible
         this.setVisible(true);
 		System.out.println("BOY: " + gamePanel.getHeight());
+		System.out.println("BOY: " + gamePanel.getWidth());
 
         System.out.println("All done creating our frame");
         // tell the main thread that we are done creating our dialogs.

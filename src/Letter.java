@@ -1,3 +1,4 @@
+import java.awt.Color;
 
 public class Letter {
 	
@@ -25,6 +26,17 @@ public class Letter {
 	public void changeState(int state) {
 		this.state = state;
 	}
+
+	public Color getColor() {
+        if (state == 1) {
+            return new Color(50, 50, 50);
+        }else if (state == 2) {
+            return new Color(255, 255, 0);
+        }else if (state == 3) {
+            return new Color(0, 255, 0);
+        }
+        return new Color(128, 128, 128);
+    }
 
 	public char getLetter() {
 		return letter;
