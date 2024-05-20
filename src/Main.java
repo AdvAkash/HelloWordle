@@ -1,19 +1,23 @@
 import javax.swing.*;
+
+import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Scanner;
 
 public class Main extends JFrame {
 
-	public static final int WIDTH = 450;
-    public static final int HEIGHT = 800;
+	public static double width;
+	public static  double height;
 
 	private JPanel gamePanel; 
 
 	public static void main(String[] args) {
 		Main theGUI = new Main();
-		SwingUtilities.invokeLater(() -> theGUI.createFrame(theGUI));
 
+		SwingUtilities.invokeLater(() -> theGUI.createFrame(theGUI));
 		Keyboard keyboard = new Keyboard();
-		System.out.println(keyboard);
+		//System.out.println(keyboard);
 		Word targetWord = new Word("codes");
 		System.out.println(targetWord);
 		Scanner console = new Scanner(System.in);
@@ -22,9 +26,8 @@ public class Main extends JFrame {
 		for(int i = 0; i <= 4; i++) {
 			input = console.nextLine();
 			guess = new Word(input);
-			System.out.println(guess);
 			guess.check(targetWord);
-			System.out.println(guess);
+			// System.out.println(guess);
 		}
 		console.close();
 	}
@@ -44,22 +47,14 @@ public class Main extends JFrame {
 		gamePanel = new GamePanel();
 		gamePanel.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 		this.add(gamePanel);
-		System.out.println("BOY: " + gamePanel.getHeight());
 		gamePanel.setVisible(true); 
-		System.out.println("BOY: " + gamePanel.getWidth());
 		
 
         // Set this JFrame to be visible
         this.setVisible(true);
-		System.out.println("BOY: " + gamePanel.getHeight());
-		System.out.println("BOY: " + gamePanel.getWidth());
 
         System.out.println("All done creating our frame");
-        // tell the main thread that we are done creating our dialogs.
-        // This allows the main thread to stop wait()'ing.
-        // synchronized (semaphore) {
-        //     semaphore.notify();
-        // }
+
     }
 
 	private void addMenuBar() {

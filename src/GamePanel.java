@@ -12,14 +12,25 @@ public class GamePanel extends JPanel implements ActionListener {
     private static Letter[][] grid;
     public static final int ROW = 6;
     public static final int COL = 5;
-    public static final int SIZE = 100;
-    public static final int WIDTH = 473;
-    public static final int HEIGHT = 150;
+    public static final int SIZE = 80;
+    public static int WIDTH; 
+    public static int HEIGHT;
     public static int OFFSET = 0;
+    
 
     public GamePanel() {
         createComponents();
         keyboard = new Keyboard();
+        this.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				WIDTH = getWidth();
+				HEIGHT = getHeight();
+                repaint();
+				//theGUI.paintComponents(null);
+			}
+
+
+		});
     }
 
     public void createComponents() {
@@ -56,10 +67,14 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public static void drawBoard(Graphics g) {
-        // int offset = 10 ;
+        int totalGridWidth = COL * SIZE;
+        int totalGridHeight = ROW * SIZE;
+        int startX = (WIDTH - totalGridWidth) / 2;
+        int startY = (HEIGHT - totalGridHeight) / 2;
+
         for (int row = 0; row < ROW; row++) {
             for (int col = 0; col < COL; col++) {
-                g.drawRect(WIDTH + col * (SIZE), HEIGHT + row * (SIZE), SIZE, SIZE);
+                g.drawRect(startX + col * SIZE, startY + row * SIZE, SIZE, SIZE);
             }
         }
     }
@@ -110,9 +125,10 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawKeyboard(Graphics g) {
+        
         for (int row = 0; row < keyboard.table.size(); row++) {
-            int posX = (Main.WIDTH/2)-(int)((((double)(keyboard.table.get(row).size()))/2.0)*50)+50; //+50 for no flexibility
-            int posY = Main.HEIGHT-180+(50*row)-20; //-20 for spacing
+            int posX = (WIDTH/2)-(int)((((double)(keyboard.table.get(row).size()))/2.0)*50)+50; //+50 for no flexibility
+            int posY = HEIGHT-180+(50*row)-20; //-20 for spacing
             for (Letter letter : keyboard.table.get(row)) {
                 g.setColor(letter.getColor());
                 g.fillRect(posX, posY, 50, 50);
