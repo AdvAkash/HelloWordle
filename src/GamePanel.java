@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private static Letter[][] grid;
     public static final int ROW = 6;
     public static final int COL = 5;
-    public static final int SIZE = 80;
+    public static int SIZE;
     public static int WIDTH; 
     public static int HEIGHT;
     public static int OFFSET = 0;
@@ -28,13 +28,11 @@ public class GamePanel extends JPanel implements ActionListener {
                 repaint();
 				//theGUI.paintComponents(null);
 			}
-
-
 		});
     }
 
     public void createComponents() {
-        this.setBackground(new Color(192, 192, 192));
+        this.setBackground(new Color(255, 255, 255));
         setLayout(null);
         createHeader();
         createGrid();
@@ -66,27 +64,45 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+
+    // TODO: typecast SIZE to double
     public static void drawBoard(Graphics g) {
+        SIZE = Math.min((WIDTH/(4/2))/COL, (HEIGHT/(4/2))/ROW);
         int totalGridWidth = COL * SIZE;
         int totalGridHeight = ROW * SIZE;
-        int startX = (WIDTH - totalGridWidth) / 2;
-        int startY = (HEIGHT - totalGridHeight) / 2;
+
+        // subtracts width/height of GUI by width/height of grid
+        // Divides values by 2 to center grid
+        int width = (WIDTH - totalGridWidth) / 2;
+        int height = (HEIGHT - totalGridHeight) / 2;
 
         for (int row = 0; row < ROW; row++) {
             for (int col = 0; col < COL; col++) {
-                g.drawRect(startX + col * SIZE, startY + row * SIZE, SIZE, SIZE);
+                
+                // positions grid boxes side by side
+                g.drawRect(width + col * SIZE, height + row * SIZE, SIZE, SIZE);
             }
         }
     }
 
     public static void drawLetters(Graphics g) {
+        SIZE = Math.min((WIDTH/2)/COL, (HEIGHT/2)/ROW);
         Font font = new Font("Arial", Font.BOLD, 24);
+        int totalGridWidth = COL * SIZE;
+        int totalGridHeight = ROW * SIZE;
 
+
+        // subtracts width/height of GUI by width/height of grid
+        // Divides values by 2 to center grid
+        int width = (WIDTH - totalGridWidth) / 2;
+        int height = (HEIGHT - totalGridHeight) / 2;
         for (int row = 0; row < ROW; row++) {
             for (int col = 0; col < COL; col++) {
-                int x = WIDTH + col * (OFFSET + SIZE) + OFFSET + 30;
-                int y = HEIGHT + row * (OFFSET + SIZE) + OFFSET + 50;
                 g.setFont(font);
+
+                // ensures letter is positioned in middle of grid box
+                int x = width + col * SIZE + (SIZE/2);
+                int y = height + row * SIZE + (SIZE/2);
                 g.drawString(grid[row][col].toString(), x, y);
             }
         }
@@ -125,7 +141,6 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawKeyboard(Graphics g) {
-        
         for (int row = 0; row < keyboard.table.size(); row++) {
             int posX = (WIDTH/2)-(int)((((double)(keyboard.table.get(row).size()))/2.0)*50)+50; //+50 for no flexibility
             int posY = HEIGHT-180+(50*row)-20; //-20 for spacing
