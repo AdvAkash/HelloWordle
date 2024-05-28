@@ -67,26 +67,26 @@ public class GamePanel extends JPanel implements ActionListener {
 
     // TODO: typecast SIZE to double
     public static void drawBoard(Graphics g) {
-        SIZE = Math.min((WIDTH/(4/2))/COL, (HEIGHT/(4/2))/ROW);
+        SIZE = Math.min((WIDTH * 5 / 8)/COL, (HEIGHT * 5 / 8)/ROW);
         int totalGridWidth = COL * SIZE;
         int totalGridHeight = ROW * SIZE;
 
         // subtracts width/height of GUI by width/height of grid
         // Divides values by 2 to center grid
-        int width = (WIDTH - totalGridWidth) / 2;
-        int height = (HEIGHT - totalGridHeight) / 2;
+        int posX = (WIDTH - totalGridWidth) / 2;
+        int posY = (HEIGHT - totalGridHeight) / 2;
 
         for (int row = 0; row < ROW; row++) {
             for (int col = 0; col < COL; col++) {
                 
                 // positions grid boxes side by side
-                g.drawRect(width + col * SIZE, height + row * SIZE, SIZE, SIZE);
+                g.drawRect(posX + col * SIZE, posY + row * SIZE, SIZE, SIZE);
             }
         }
     }
 
     public static void drawLetters(Graphics g) {
-        SIZE = Math.min((WIDTH/2)/COL, (HEIGHT/2)/ROW);
+        SIZE = Math.min((WIDTH * 5 / 8)/COL, (HEIGHT * 5 / 8)/ROW);
         Font font = new Font("Arial", Font.BOLD, 24);
         int totalGridWidth = COL * SIZE;
         int totalGridHeight = ROW * SIZE;
@@ -118,6 +118,8 @@ public class GamePanel extends JPanel implements ActionListener {
         System.out.println(word);
 
         int index = 0;
+
+        // TODO: get rid of loop
         for (int row = 0 + OFFSET; row < ROW; row++) {
             for (int col = 0; col < COL; col++) {
                 grid[row][col] = word.get(index);
@@ -141,7 +143,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawKeyboard(Graphics g) {
-        SIZE = Math.min((WIDTH/(4/2))/COL, (HEIGHT/(4/2))/ROW);
+        SIZE = Math.min((WIDTH * 3 / 8)/COL, (HEIGHT * 3 / 8)/ROW);
         for (int row = 0; row < keyboard.table.size(); row++) {
             int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * SIZE) + SIZE / 2;
             int posY = HEIGHT - SIZE * (keyboard.table.size() - row) - 20; //-20 for flexability
