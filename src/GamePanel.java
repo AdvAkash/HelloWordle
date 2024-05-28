@@ -141,19 +141,18 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawKeyboard(Graphics g) {
+        SIZE = Math.min((WIDTH/(4/2))/COL, (HEIGHT/(4/2))/ROW);
         for (int row = 0; row < keyboard.table.size(); row++) {
-            int posX = (WIDTH/2)-(int)((((double)(keyboard.table.get(row).size()))/2.0)*50)+50; //+50 for no flexibility
-            int posY = HEIGHT-180+(50*row)-20; //-20 for spacing
+            int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * SIZE) + SIZE / 2;
+            int posY = HEIGHT - SIZE * (keyboard.table.size() - row) - 20; //-20 for flexability
+
             for (Letter letter : keyboard.table.get(row)) {
                 g.setColor(letter.getColor());
-                g.fillRect(posX, posY, 50, 50);
-                g.setColor(new Color(0,0,0));
-                g.drawString(letter.getLetter()+"", posX+20, posY+30);
-                System.out.print(letter.getLetter());
-                posX += 50;
-
+                g.fillRect(posX, posY, SIZE, SIZE);
+                g.setColor(Color.BLACK);
+                g.drawString(letter.getLetter() + "", posX + SIZE / 2, posY + SIZE / 2);
+                posX += SIZE;
             }
-            posY += 50;
             System.out.println();
         }
     }
