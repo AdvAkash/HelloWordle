@@ -8,7 +8,7 @@ public class Main extends JFrame {
 	public static double width;
 	public static double height;
 
-	private GamePanel gamePanel; 
+	private GamePanel gamePanel;
 
 	public static void main(String[] args) {
 		Main theGUI = new Main();
@@ -46,7 +46,7 @@ public class Main extends JFrame {
         addMenuBar();
 
 		gamePanel = new GamePanel();
-		MyKeyListener keyListener = new MyKeyListener(gamePanel);
+		MyKeyListener keyListener = new MyKeyListener();
 		this.addKeyListener(keyListener);
 		// JScrollPane scroll = new JScrollPane(gamePanel);
 		gamePanel.setBounds(0, 0, WIDTH, HEIGHT);
@@ -86,4 +86,7 @@ public class Main extends JFrame {
 		bar.add(menu);
 	}
 
+	public void keyTypedz(){
+		gamePanel.updateGrid("HI");
+	}
 }

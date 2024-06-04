@@ -7,6 +7,8 @@ import java.awt.*;
 public class GamePanel extends JPanel{
 
     Keyboard keyboard;
+	public static Word guess = new Word();
+    private ArrayList<Word> guesses = new ArrayList<>();
 
     // private static final int HEADER_SIZE = Main.getSize().WIDTH;
     private static Letter[][] grid;
@@ -150,15 +152,24 @@ public class GamePanel extends JPanel{
         }
     }
 
-    public void updateKeyPressed(char keyPressed) {
+    public void updateKeyPressed(char keyPressed, int backspace) {
         // Add the pressed key to the grid immediately
         for (int col = 0; col < COL; col++) {
             if (grid[OFFSET][col].getLetter() == 0) {
-                grid[OFFSET][col] = new Letter(keyPressed);
-                break;
+                if(backspace == 1){
+                    grid[OFFSET][col-backspace] = new Letter();
+                    break;
+                }else{
+                    grid[OFFSET][col] = new Letter(keyPressed);
+                    break;
+                }
             }
         }
         repaint(); // Refresh the panel to display the updated grid
+    }
+
+    public static void test() {
+
     }
 
     public void processWord(String word) {

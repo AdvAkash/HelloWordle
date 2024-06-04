@@ -14,6 +14,10 @@ public class Word {
 		
 	}
 
+	public void addLetter(Character letter){
+		word.add(new Letter(letter));
+	}
+
 	public ArrayList<Letter> getLetters() {
 		return word;
 	}
