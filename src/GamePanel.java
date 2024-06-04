@@ -16,6 +16,7 @@ public class GamePanel extends JPanel{
     public static int WIDTH; 
     public static int HEIGHT;
     public static int OFFSET = 0;
+    public static int count;
     
 
     public GamePanel() {
@@ -36,8 +37,6 @@ public class GamePanel extends JPanel{
         setLayout(null);
         createHeader();
         createGrid();
-        updateGrid("HELLO");
-        updateGrid("WORLD");
     }
 
     public void createHeader() {
@@ -52,9 +51,6 @@ public class GamePanel extends JPanel{
         }
     }
 
-    //public void actionPerformed(ActionEvent e) {
-
-    //}
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -118,14 +114,9 @@ public class GamePanel extends JPanel{
         System.out.println(word);
 
         int index = 0;
-
-        // TODO: get rid of loop
-        for (int row = 0 + OFFSET; row < ROW; row++) {
-            for (int col = 0; col < COL; col++) {
-                grid[row][col] = word.get(index);
+        for (int col = 0; col < COL; col++) {
+                grid[OFFSET][col] = word.get(index);
                 index++;
-            }
-            break;
         }
         OFFSET++;
         printGrid(grid);
@@ -145,8 +136,8 @@ public class GamePanel extends JPanel{
     public void drawKeyboard(Graphics g) {
         SIZE = Math.min((WIDTH * 3 / 8)/COL, (HEIGHT * 3 / 8)/ROW);
         for (int row = 0; row < keyboard.table.size(); row++) {
-            int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * SIZE) + SIZE / 2;
-            int posY = HEIGHT - SIZE * (keyboard.table.size() - row) - 20; //-20 for flexability
+            int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * SIZE);
+            int posY = HEIGHT - SIZE * (keyboard.table.size() - row); 
 
             for (Letter letter : keyboard.table.get(row)) {
                 g.setColor(letter.getColor());
@@ -158,5 +149,25 @@ public class GamePanel extends JPanel{
             System.out.println();
         }
     }
+
+    public void updateKeyPressed(char keyPressed) {
+        // Add the pressed key to the grid immediately
+        for (int col = 0; col < COL; col++) {
+            if (grid[OFFSET][col].getLetter() == 0) {
+                grid[OFFSET][col] = new Letter(keyPressed);
+                break;
+            }
+        }
+        repaint(); // Refresh the panel to display the updated grid
+    }
+
+    public void processWord(String word) {
+        // Change the color of each tile in the current row
+        for (int col = 0; col < COL; col++) {
+            grid[OFFSET][col].changeState(3); // Change state to indicate found
+        }
+        repaint(); // Refresh the panel to display the updated grid
+    }
+    
 
 }
