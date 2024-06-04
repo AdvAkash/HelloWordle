@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.awt.*;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel{
 
     Keyboard keyboard;
 
@@ -52,9 +52,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    public void actionPerformed(ActionEvent e) {
+    //public void actionPerformed(ActionEvent e) {
 
-    }
+    //}
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -159,21 +159,4 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        //throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-        System.out.println(e.getKeyChar()+"");
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        //throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
-        System.out.println(e.getKeyChar());
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        //throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
-        System.out.println(e.getKeyChar());
-    }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main extends JFrame {
 
 	public static double width;
-	public static  double height;
+	public static double height;
 
 	private JPanel gamePanel; 
 
@@ -46,6 +46,8 @@ public class Main extends JFrame {
         addMenuBar();
 
 		gamePanel = new GamePanel();
+		MyKeyListener keyListener = new MyKeyListener();
+		this.addKeyListener(keyListener);
 		// JScrollPane scroll = new JScrollPane(gamePanel);
 		gamePanel.setBounds(0, 0, WIDTH, HEIGHT);
 		//this.add(scroll);
