@@ -26,7 +26,7 @@ public class GamePanel extends JPanel{
     public static int count;
 
     private static final String[] wordList = {
-        "CODES", "WORDS", "GUESS", "APPLE", "PIZZA",
+        "CODES", "WORDS", "GUESS", "STARE", "CLOUD",
         "MOUSE", "TABLE", "CHAIR", "HOUSE", "LIGHT"
     };
 
@@ -67,6 +67,7 @@ public class GamePanel extends JPanel{
         // Set the label to resize with the frame
         this.add(headerLabel, BorderLayout.NORTH);
     }
+    
 
     public void createGrid() {
         grid = new Letter[ROW][COL];
@@ -147,9 +148,8 @@ public class GamePanel extends JPanel{
         // Divide values by 2 to center the grid
         int posX = (WIDTH - totalGridWidth) / 2;
         int posY = (HEIGHT - totalGridHeight) / 2;
-    
-        // Set the gap size (adjust as needed)
-        int gap = 5; // You can change this value
+
+        int gap = 5;
     
         for (row = 0; row < guesses.size(); row++) {
             for (col = 0; col < 5; col++) {
@@ -230,27 +230,34 @@ public class GamePanel extends JPanel{
     }
 
     public void drawKeyboard(Graphics g) {
-        SIZE = Math.min((WIDTH * 3 / 8) / COL, (HEIGHT * 3 / 8) / ROW);
-    
-        for (int row = 0; row < keyboard.table.size(); row++) {
-            int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * SIZE);
-            int posY = HEIGHT - SIZE * (keyboard.table.size() - row);
-    
-            for (Letter letter : keyboard.table.get(row)) {
-                g.setColor(letter.getColor());
-                g.fillRect(posX, posY, SIZE, SIZE);
-                g.setColor(Color.BLACK);
-    
-                // Center the letter within the box
-                int x = posX + SIZE / 2;
-                int y = posY + SIZE / 2;
-                g.setFont(font);
-                g.drawString(letter.getLetter() + "", x, y);
-    
-                posX += SIZE;
-            }
+    SIZE = Math.min((WIDTH * 3 / 8) / COL, (HEIGHT * 3 / 8) / ROW);
+    int gap = 5;
+
+    for (int row = 0; row < keyboard.table.size(); row++) {
+        int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * (SIZE + gap));
+        int posY = HEIGHT - (SIZE + gap) * (keyboard.table.size() - row);
+
+        for (Letter letter : keyboard.table.get(row)) {
+            g.setColor(letter.getColor());
+            g.fillRect(posX, posY, SIZE, SIZE);
+            g.setColor(Color.BLACK);
+            g.drawRect(posX, posY, SIZE, SIZE);
+
+            // Get font metrics
+            FontMetrics fm = g.getFontMetrics(font);
+
+            // Calculate the position to center the letter within the box
+            int x = posX + (SIZE - fm.stringWidth(letter.getLetter()+"")) / 2;
+            int y = posY + (SIZE + fm.getAscent()) / 2;
+
+            g.setFont(font);
+            g.drawString(letter.getLetter()+"", x, y);
+
+            posX += SIZE + gap;
         }
     }
+}
+
     
 
     /*

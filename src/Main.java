@@ -1,7 +1,6 @@
 import javax.swing.*;
 
 import java.awt.Color;
-import java.util.Scanner;
 
 public class Main extends JFrame {
 
@@ -33,7 +32,8 @@ public class Main extends JFrame {
 
 	public void createFrame(Object semaphore) {
 		this.setTitle("Hello Wordle");
-        this.setSize(WIDTH,HEIGHT);
+        this.setSize(600, 900);
+		//this.setSize(WIDTH,HEIGHT);
 		this.getContentPane().setBackground(new Color(100,10,50));
 
         // Allows the application to properly close when the
