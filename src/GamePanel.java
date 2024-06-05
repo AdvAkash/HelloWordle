@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel{
 
+    static Word target = new Word("CODES");
     Keyboard keyboard;
 	public static Word guess = new Word();
     private static ArrayList<Word> guesses = new ArrayList<>();
@@ -145,7 +146,7 @@ public class GamePanel extends JPanel{
                 // Draw the letter (centered within the box)
                 letterX = x + SIZE / 2;
                 letterY = y + SIZE / 2;
-                g.drawString(guesses.get(row).getLetters().get(col).toString(), letterX, letterY);
+                g.drawString(guesses.get(row).getLetters().get(col).toString(), letterX, letterY+OFFSET);
             }
         }
         y = posY + (row+1) * (SIZE + gap);
@@ -262,7 +263,10 @@ public class GamePanel extends JPanel{
     
     public static void guess(){
         Word newGuess = new Word(guess.getWord());
+        newGuess.check(target);
         guesses.add(newGuess);
+        System.out.println(guess);
+        System.out.println(guesses);
         guess = new Word();
     }
 
