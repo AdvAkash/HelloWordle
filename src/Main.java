@@ -8,7 +8,7 @@ public class Main extends JFrame {
 	public static double width;
 	public static double height;
 
-	private GamePanel gamePanel;
+	private JPanel gamePanel; 
 
 	public static void main(String[] args) {
 		Main theGUI = new Main();
@@ -86,7 +86,4 @@ public class Main extends JFrame {
 		bar.add(menu);
 	}
 
-	public void keyTypedz(){
-		gamePanel.updateGrid("HI");
-	}
 }

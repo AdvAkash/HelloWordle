@@ -2,8 +2,10 @@ import java.util.ArrayList;
 
 public class Word {
 	private ArrayList<Letter> word = new ArrayList<>();
+	private String stringWord;
 	
 	public Word(String word) {
+		stringWord = word;
 		word = word.toUpperCase();
 		for(int currentChar = 0; currentChar < word.length(); currentChar++) {
 			this.word.add(new Letter(word.charAt(currentChar)));
@@ -14,8 +16,16 @@ public class Word {
 		
 	}
 
+	public String getWord(){
+		return stringWord;
+	}
+
 	public void addLetter(Character letter){
 		word.add(new Letter(letter));
+	}
+
+	public void removeLast(){
+		word.removeLast();
 	}
 
 	public ArrayList<Letter> getLetters() {
