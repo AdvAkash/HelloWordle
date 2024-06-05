@@ -154,6 +154,7 @@ public class GamePanel extends JPanel{
         for(col = 0; col < guess.getLetters().size(); col++){
             x = posX + col * (SIZE + gap);
             letterX = x + SIZE / 2;
+            g.setFont(font);
             g.drawString(guess.getLetters().get(col).toString(), letterX, letterY);
         }
         repaint();
