@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel{
 
-    static Word target = new Word("CODES");
+    public static Word target = new Word("CODES");
     Keyboard keyboard;
 	public static Word guess = new Word();
     private static ArrayList<Word> guesses = new ArrayList<>();
@@ -43,6 +43,7 @@ public class GamePanel extends JPanel{
         createGrid();
     }
 
+    // add title
     public void createHeader() {
     }
 
@@ -116,8 +117,8 @@ public class GamePanel extends JPanel{
         int totalGridHeight = ROW * SIZE;
         int x;
         int y;
-        int row = 0;
-        int col = 0;
+        int row;
+        int col;
         int letterX;
         int letterY;
     
@@ -129,8 +130,8 @@ public class GamePanel extends JPanel{
         // Set the gap size (adjust as needed)
         int gap = 5; // You can change this value
     
-        for (; row < guesses.size(); row++) {
-            for (; col < 5; col++) {
+        for (row = 0; row < guesses.size(); row++) {
+            for (col = 0; col < 5; col++) {
                 g.setFont(font);
     
                 // Calculate the position with gap
@@ -146,19 +147,35 @@ public class GamePanel extends JPanel{
                 // Draw the letter (centered within the box)
                 letterX = x + SIZE / 2;
                 letterY = y + SIZE / 2;
-                g.drawString(guesses.get(row).getLetters().get(col).toString(), letterX, letterY+OFFSET);
+    
+                // Center the text properly
+                FontMetrics fm = g.getFontMetrics();
+                int textWidth = fm.stringWidth(guesses.get(row).getLetters().get(col).toString());
+                int textHeight = fm.getAscent();
+    
+                g.drawString(guesses.get(row).getLetters().get(col).toString(), letterX - textWidth / 2, letterY + textHeight / 4);
             }
         }
-        y = posY + (row+1) * (SIZE + gap);
+    
+        // Draw the current guess
+        y = posY + (row + 1) * (SIZE + gap);
         letterY = y + SIZE / 2;
-        for(col = 0; col < guess.getLetters().size(); col++){
+        for (col = 0; col < guess.getLetters().size(); col++) {
             x = posX + col * (SIZE + gap);
             letterX = x + SIZE / 2;
             g.setFont(font);
-            g.drawString(guess.getLetters().get(col).toString(), letterX, letterY);
+    
+            // Center the text properly
+            FontMetrics fm = g.getFontMetrics();
+            int textWidth = fm.stringWidth(guess.getLetters().get(col).toString());
+            int textHeight = fm.getAscent();
+    
+            g.drawString(guess.getLetters().get(col).toString(), letterX - textWidth / 2, letterY + textHeight / 4);
         }
+    
         repaint();
     }
+    
     
     
 
@@ -234,33 +251,33 @@ public class GamePanel extends JPanel{
     }
     */
 
-    public void updateKeyPressed(char keyPressed, int backspace) {
-        // Add the pressed key to the grid immediately
-        for (int col = 0; col < COL; col++) {
-            if (grid[OFFSET][col].getLetter() == 0) {
-                if(backspace == 1){
-                    grid[OFFSET][col-backspace] = new Letter();
-                    break;
-                }else{
-                    grid[OFFSET][col] = new Letter(keyPressed);
-                    break;
-                }
-            }
-        }
-        repaint(); // Refresh the panel to display the updated grid
-    }
+    // public void updateKeyPressed(char keyPressed, int backspace) {
+    //     // Add the pressed key to the grid immediately
+    //     for (int col = 0; col < COL; col++) {
+    //         if (grid[OFFSET][col].getLetter() == 0) {
+    //             if(backspace == 1){
+    //                 grid[OFFSET][col-backspace] = new Letter();
+    //                 break;
+    //             }else{
+    //                 grid[OFFSET][col] = new Letter(keyPressed);
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     repaint(); // Refresh the panel to display the updated grid
+    // }
 
-    public static void test() {
+    // public static void test() {
 
-    }
+    // }
 
-    public void processWord(String word) {
-        // Change the color of each tile in the current row
-        for (int col = 0; col < COL; col++) {
-            grid[OFFSET][col].changeState(3); // Change state to indicate found
-        }
-        repaint(); // Refresh the panel to display the updated grid
-    }
+    // public void processWord(String word) {
+    //     // Change the color of each tile in the current row
+    //     for (int col = 0; col < COL; col++) {
+    //         grid[OFFSET][col].changeState(3); // Change state to indicate found
+    //     }
+    //     repaint(); // Refresh the panel to display the updated grid
+    // }
     
     public static void guess(){
         Word newGuess = new Word(guess.getWord());
