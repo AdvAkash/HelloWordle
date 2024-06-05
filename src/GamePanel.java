@@ -13,6 +13,7 @@ public class GamePanel extends JPanel{
     public static Word target;
     public static int guessCount = 0;
     private static ArrayList<Word> guesses = new ArrayList<>();
+    Font titleFont = new Font("Arial", Font.BOLD, 72);
     Font font = new Font("Arial", Font.BOLD, 24);
 
     // private static final int HEADER_SIZE = Main.getSize().WIDTH;
@@ -24,11 +25,16 @@ public class GamePanel extends JPanel{
     public static int HEIGHT;
     public static int OFFSET = 0;
     public static int count;
+    private int gap = 5;
 
     private static final String[] wordList = {
-        "CODES", "WORDS", "GUESS", "STARE", "CLOUD",
-        "MOUSE", "TABLE", "CHAIR", "HOUSE", "LIGHT"
+       "CODES", "WORDS", "GUEST", "STARE", "CLOUD",
+       "MOUSE", "TABLE", "CHAIR", "HOUSE", "LIGHT"
     };
+
+    //private static final String[] wordList = {"HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO"};
+
+    //private static final String[] wordList = {"LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT"};
 
     public GamePanel() {
 
@@ -60,7 +66,7 @@ public class GamePanel extends JPanel{
     // add title
     public void createHeader() {
         JLabel headerLabel = new JLabel("HelloWordle");
-        headerLabel.setFont(new Font("Arial", Font.BOLD, 72));
+        headerLabel.setFont(titleFont);
         headerLabel.setForeground(Color.BLACK); // You can change the color as needed
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
@@ -136,7 +142,7 @@ public class GamePanel extends JPanel{
     public void drawGridOfLetters(Graphics g) {
         SIZE = Math.min((WIDTH * 9 / 16) / COL, (HEIGHT * 9 / 16) / ROW);
         int totalGridWidth = COL * SIZE;
-        int totalGridHeight = ROW * SIZE;
+        int totalGridHeight = 3*(SIZE+gap);//ROW * SIZE;
         int x;
         int y;
         int row;
@@ -147,10 +153,8 @@ public class GamePanel extends JPanel{
         // Subtract width/height of GUI by width/height of grid
         // Divide values by 2 to center the grid
         int posX = (WIDTH - totalGridWidth) / 2;
-        int posY = (HEIGHT - totalGridHeight) / 2;
-
-        int gap = 5;
-    
+        int posY = //g.getFontMetrics(titleFont).getHeight()+0; (HEIGHT - totalGridHeight) / 2;
+        (totalGridHeight-g.getFontMetrics(titleFont).getHeight());
         for (row = 0; row < guesses.size(); row++) {
             for (col = 0; col < 5; col++) {
                 g.setFont(font);
@@ -230,7 +234,7 @@ public class GamePanel extends JPanel{
     }
 
     public void drawKeyboard(Graphics g) {
-    SIZE = Math.min((WIDTH * 3 / 8) / COL, (HEIGHT * 3 / 8) / ROW);
+    SIZE = Math.min((WIDTH * 7 / 16) / COL, (HEIGHT * 7 / 16) / ROW);
     int gap = 5;
 
     for (int row = 0; row < keyboard.table.size(); row++) {
