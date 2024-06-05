@@ -17,6 +17,13 @@ public class Word {
 	}
 
 	public String getWord(){
+		if(stringWord == null){
+			String constructWord = "";
+			for(Letter letter : word){
+				constructWord += letter.getLetter();
+			}
+			return constructWord;
+		}
 		return stringWord;
 	}
 
