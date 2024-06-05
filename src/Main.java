@@ -16,19 +16,19 @@ public class Main extends JFrame {
 		SwingUtilities.invokeLater(() -> theGUI.createFrame(theGUI));
 		// Keyboard keyboard = new Keyboard();
 		//System.out.println(keyboard);
-		System.out.println("WIDTH: " + GamePanel.WIDTH);
-		System.out.println("HEIGHT " + GamePanel.HEIGHT);
-		Word targetWord = new Word("codes");
-		System.out.println(targetWord);
-		Scanner console = new Scanner(System.in);
-		String input;
-		Word guess;
-		for(int i = 0; i <= 4; i++) {
-			input = console.nextLine();
-			guess = new Word(input);
-			guess.check(targetWord);
-		}
-		console.close();
+		// System.out.println("WIDTH: " + GamePanel.WIDTH);
+		// System.out.println("HEIGHT " + GamePanel.HEIGHT);
+		// Word targetWord = new Word("codes");
+		// System.out.println(targetWord);
+		// Scanner console = new Scanner(System.in);
+		// String input;
+		// Word guess;
+		// for(int i = 0; i <= 4; i++) {
+		// 	input = console.nextLine();
+		// 	guess = new Word(input);
+		// 	guess.check(targetWord);
+		// }
+		// console.close();
 	}
 
 	public void createFrame(Object semaphore) {

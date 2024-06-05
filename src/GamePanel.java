@@ -2,13 +2,15 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.awt.*;
 
 public class GamePanel extends JPanel{
 
-    public static Word target = new Word("CODES");
+    
     Keyboard keyboard;
 	public static Word guess = new Word();
+    public static Word target;
     private static ArrayList<Word> guesses = new ArrayList<>();
     Font font = new Font("Arial", Font.BOLD, 24);
 
@@ -21,9 +23,19 @@ public class GamePanel extends JPanel{
     public static int HEIGHT;
     public static int OFFSET = 0;
     public static int count;
-    
+
+    private static final String[] wordList = {
+        "CODES", "WORDS", "GUESS", "APPLE", "PIZZA",
+        "MOUSE", "TABLE", "CHAIR", "HOUSE", "LIGHT"
+    };
 
     public GamePanel() {
+
+        Random r=new Random(); 
+        int randomNumber=r.nextInt(wordList.length); 
+        String randomWord = wordList[randomNumber];
+        target = new Word(randomWord);
+
         createComponents();
         keyboard = new Keyboard();
         this.addComponentListener(new ComponentAdapter() {
@@ -34,6 +46,7 @@ public class GamePanel extends JPanel{
 				//theGUI.paintComponents(null);
 			}
 		});
+
     }
 
     public void createComponents() {
@@ -112,7 +125,7 @@ public class GamePanel extends JPanel{
     */
 
     public void drawGridOfLetters(Graphics g) {
-        SIZE = Math.min((WIDTH * 5 / 8) / COL, (HEIGHT * 5 / 8) / ROW);
+        SIZE = Math.min((WIDTH * 9 / 16) / COL, (HEIGHT * 9 / 16) / ROW);
         int totalGridWidth = COL * SIZE;
         int totalGridHeight = ROW * SIZE;
         int x;
@@ -158,7 +171,7 @@ public class GamePanel extends JPanel{
         }
     
         // Draw the current guess
-        y = posY + (row + 1) * (SIZE + gap);
+        y = posY + (row) * (SIZE + gap);
         letterY = y + SIZE / 2;
         for (col = 0; col < guess.getLetters().size(); col++) {
             x = posX + col * (SIZE + gap);
