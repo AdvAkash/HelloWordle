@@ -9,17 +9,22 @@ public class MyKeyListener implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         // Handle key-typed events (e.g., when the user types a character)
-        char typedChar = e.getKeyChar();
-        if(typedChar == KeyEvent.VK_ENTER){
-            GamePanel.guess();
-        }else if (typedChar == KeyEvent.VK_BACK_SPACE) {
-            GamePanel.backspace();
-        }else if (GamePanel.guess.getLetters().size()<5){
-            try {
-                typedChar = Character.toUpperCase(e.getKeyChar());
-                GamePanel.guess.addLetter(typedChar);
-            } catch (Exception ex) {
-                System.out.println("Not a letter, try any of the following:\nA B C D E F\nG H I J K L M\nN O P Q R S\nT U V W X Y Z");
+        if (GamePanel.guessCount < 6) {
+            char typedChar = e.getKeyChar();
+            if(typedChar == KeyEvent.VK_ENTER){
+                if (GamePanel.guess.getLetters().size() == 5) {
+
+                    GamePanel.guess();
+                }
+            }else if (typedChar == KeyEvent.VK_BACK_SPACE) {
+                GamePanel.backspace();
+            }else if ((GamePanel.guess.getLetters().size()<5) && (Character.isLetter(typedChar))){
+                try {
+                    typedChar = Character.toUpperCase(e.getKeyChar());
+                    GamePanel.guess.addLetter(typedChar);
+                } catch (Exception ex) {
+                    System.out.println("Not a letter, try any of the following:\nA B C D E F\nG H I J K L M\nN O P Q R S\nT U V W X Y Z");
+                }
             }
         }
     }

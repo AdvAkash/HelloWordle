@@ -11,6 +11,7 @@ public class GamePanel extends JPanel{
     private static Keyboard keyboard;
 	public static Word guess = new Word();
     public static Word target;
+    public static int guessCount = 0;
     private static ArrayList<Word> guesses = new ArrayList<>();
     Font font = new Font("Arial", Font.BOLD, 24);
 
@@ -51,13 +52,20 @@ public class GamePanel extends JPanel{
 
     public void createComponents() {
         this.setBackground(new Color(255, 255, 255));
-        setLayout(null);
+        this.setLayout(new BorderLayout());
         createHeader();
         createGrid();
     }
 
     // add title
     public void createHeader() {
+        JLabel headerLabel = new JLabel("HelloWordle");
+        headerLabel.setFont(new Font("Arial", Font.BOLD, 72));
+        headerLabel.setForeground(Color.BLACK); // You can change the color as needed
+        headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        // Set the label to resize with the frame
+        this.add(headerLabel, BorderLayout.NORTH);
     }
 
     public void createGrid() {
@@ -300,13 +308,16 @@ public class GamePanel extends JPanel{
         System.out.println(guess);
         System.out.println(guesses);
         guess = new Word();
+        guessCount++;
 
-        if (newGuess.equals(target)) {
-            // Check if the number of guesses is within the specified limit (e.g., 3)
-            if (guesses.size() <= 6) {
-                // Display a game message indicating the win
-                JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-            }
+        // checks to see if user guessed word in less than 6 guesses 
+        if (newGuess.toString().contains("33333")) {
+
+            // incremements guessCount to nullify keyListener
+            guessCount = 6;
+            JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        } else if (guessCount == 6) {
+            JOptionPane.showMessageDialog(null, "Sorry! You lost.", "Game Over", JOptionPane.ERROR_MESSAGE);
         }
     }
 
