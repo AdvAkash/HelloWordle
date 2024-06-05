@@ -299,6 +299,14 @@ public class GamePanel extends JPanel{
         System.out.println(guess);
         System.out.println(guesses);
         guess = new Word();
+
+        if (newGuess.equals(target)) {
+            // Check if the number of guesses is within the specified limit (e.g., 3)
+            if (guesses.size() <= 6) {
+                // Display a game message indicating the win
+                JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }
 
     public static void backspace(){
