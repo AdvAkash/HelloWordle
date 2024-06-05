@@ -8,7 +8,7 @@ import java.awt.*;
 public class GamePanel extends JPanel{
 
     
-    Keyboard keyboard;
+    private static Keyboard keyboard;
 	public static Word guess = new Word();
     public static Word target;
     private static ArrayList<Word> guesses = new ArrayList<>();
@@ -296,6 +296,7 @@ public class GamePanel extends JPanel{
         Word newGuess = new Word(guess.getWord());
         newGuess.check(target);
         guesses.add(newGuess);
+        keyboard.updateKeys(newGuess);
         System.out.println(guess);
         System.out.println(guesses);
         guess = new Word();
