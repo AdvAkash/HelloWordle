@@ -1,36 +1,45 @@
-// import org.jsoup.Jsoup;
-// import org.jsoup.nodes.Document;
-// import org.jsoup.select.Elements;
-// import java.io.IOException;
-// import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
-// public class DictionaryScraper {
-//     public static void main(String[] args) {
-//         String baseUrl = "https://dictionary.cambridge.org/browse/english/";
-//         ArrayList<String> allWords = new ArrayList<>();
+public class DictionaryScraper {
 
-//         // Define the letters you want to scrape (e.g., A to Z)
-//         char startLetter = 'a';
-//         char endLetter = 'Z';
 
-//         for (char letter = startLetter; letter <= endLetter; letter++) {
-//             String url = baseUrl + letter;
-//             try {
-//                 Document doc = Jsoup.connect(url).get();
-//                 Elements wordLinks = doc.select(".entry-title"); // Adjust the selector based on the website's structure
+    public static void main(String args[]) {
+        try {
+            System.out.println(pickRandomWord("dictionary.txt"));
+        } catch (IOException e) {
+            System.out.println("WOW FIX THIS NOW!");
+        }
+    }
 
-//                 for (var link : wordLinks) {
-//                     String word = link.text();
-//                     allWords.add(word);
-//                 }
-//             } catch (IOException e) {
-//                 e.printStackTrace();
-//             }
-//         }
 
-//         // Print the scraped words
-//         for (String word : allWords) {
-//             System.out.println(word);
-//         }
-//     }
-// }
+    public static String pickRandomWord(String fileName) throws IOException  {
+        ArrayList<String> dictionary = new ArrayList<>();
+
+        try {
+            File file = new File(fileName);
+            Scanner reader = new Scanner(file);
+            while (reader.hasNextLine()) {
+                String word = reader.nextLine();
+                dictionary.add(word);
+            }
+            reader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        if (dictionary.isEmpty()) {
+            return null;
+        } else {
+            Random random = new Random();
+            int index = random.nextInt(dictionary.size());
+            return dictionary.get(index);
+        }
+    }
+}

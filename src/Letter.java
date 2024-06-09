@@ -29,7 +29,7 @@ public class Letter {
 
 	public Color getColor() {
         if (state == 1) {
-            return new Color(50, 50, 50);
+            return new Color(255, 51, 51);
         }else if (state == 2) {
             return new Color(255, 255, 0);
         }else if (state == 3) {

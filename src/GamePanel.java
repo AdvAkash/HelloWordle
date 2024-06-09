@@ -2,47 +2,29 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Random;
 import java.awt.*;
 
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel {
 
     
-    private static Keyboard keyboard;
-	public static Word guess = new Word();
+    
     public static Word target;
+	public static Word guess = new Word();
     public static int guessCount = 0;
     private static ArrayList<Word> guesses = new ArrayList<>();
-    Font titleFont = new Font("Arial", Font.BOLD, 72);
-    Font font = new Font("Arial", Font.BOLD, 24);
 
-    // private static final int HEADER_SIZE = Main.getSize().WIDTH;
+    private static Keyboard keyboard;
     private static Letter[][] grid;
     public static final int ROW = 6;
     public static final int COL = 5;
     public static int SIZE;
     public static int WIDTH; 
     public static int HEIGHT;
-    public static int OFFSET = 0;
-    public static int count;
+
+    // could delete
     private int gap = 5;
 
-    private static final String[] wordList = {
-       "CODES", "WORDS", "GUEST", "STARE", "CLOUD",
-       "MOUSE", "TABLE", "CHAIR", "HOUSE", "LIGHT"
-    };
-
-    //private static final String[] wordList = {"HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO", "HELLO"};
-
-    //private static final String[] wordList = {"LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT", "LIGHT"};
-
     public GamePanel() {
-
-        Random r=new Random(); 
-        int randomNumber=r.nextInt(wordList.length); 
-        String randomWord = wordList[randomNumber];
-        target = new Word(randomWord);
-
         createComponents();
         keyboard = new Keyboard();
         this.addComponentListener(new ComponentAdapter() {
@@ -50,10 +32,13 @@ public class GamePanel extends JPanel{
 				WIDTH = getWidth();
 				HEIGHT = getHeight();
                 repaint();
-				//theGUI.paintComponents(null);
 			}
 		});
 
+    }
+
+    public static void setTargetWord(String word) {
+        target = new Word(word);
     }
 
     public void createComponents() {
@@ -63,10 +48,10 @@ public class GamePanel extends JPanel{
         createGrid();
     }
 
-    // add title
+
     public void createHeader() {
         JLabel headerLabel = new JLabel("HelloWordle");
-        headerLabel.setFont(titleFont);
+        headerLabel.setFont( new Font("Arial", Font.BOLD, 72));
         headerLabel.setForeground(Color.BLACK); // You can change the color as needed
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
@@ -77,8 +62,8 @@ public class GamePanel extends JPanel{
 
     public void createGrid() {
         grid = new Letter[ROW][COL];
-        for (int row = 0; row < ROW; row++) {
-            for (int col = 0; col < COL; col++) {
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 5; col++) {
                 grid[row][col] = new Letter();
             }
         }
@@ -87,15 +72,12 @@ public class GamePanel extends JPanel{
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //drawBoard(g);
-        //drawLetters(g);
         drawGridOfLetters(g);
         drawKeyboard(g);
 
     }
 
     /*
-    // TODO: typecast SIZE to double
     public static void drawBoard(Graphics g) {
         SIZE = Math.min((WIDTH * 5 / 8)/COL, (HEIGHT * 5 / 8)/ROW);
         int totalGridWidth = COL * SIZE;
@@ -154,26 +136,26 @@ public class GamePanel extends JPanel{
         // Divide values by 2 to center the grid
         int posX = (WIDTH - totalGridWidth) / 2;
         int posY = //g.getFontMetrics(titleFont).getHeight()+0; (HEIGHT - totalGridHeight) / 2;
-        (totalGridHeight-g.getFontMetrics(titleFont).getHeight());
+        (totalGridHeight-g.getFontMetrics( new Font("Arial", Font.BOLD, 72)).getHeight());
         for (row = 0; row < guesses.size(); row++) {
             for (col = 0; col < 5; col++) {
-                g.setFont(font);
+                g.setFont(new Font("Arial", Font.BOLD, 24));
     
-                // Calculate the position with gap
+                // Calculates the position with gap
                 x = posX + col * (SIZE + gap);
                 y = posY + row * (SIZE + gap);
     
-                // Draw the black outline
+                // Draws the black outline
                 g.setColor(guesses.get(row).getLetters().get(col).getColor());
                 g.fillRect(x, y, SIZE, SIZE);
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, SIZE, SIZE);
     
-                // Draw the letter (centered within the box)
+                // Draws the letter (centered within the box)
                 letterX = x + SIZE / 2;
                 letterY = y + SIZE / 2;
     
-                // Center the text properly
+                // Centers the text properly
                 FontMetrics fm = g.getFontMetrics();
                 int textWidth = fm.stringWidth(guesses.get(row).getLetters().get(col).toString());
                 int textHeight = fm.getAscent();
@@ -188,9 +170,9 @@ public class GamePanel extends JPanel{
         for (col = 0; col < guess.getLetters().size(); col++) {
             x = posX + col * (SIZE + gap);
             letterX = x + SIZE / 2;
-            g.setFont(font);
+            g.setFont(new Font("Arial", Font.BOLD, 24));
     
-            // Center the text properly
+            // Centers the text properly
             FontMetrics fm = g.getFontMetrics();
             int textWidth = fm.stringWidth(guess.getLetters().get(col).toString());
             int textHeight = fm.getAscent();
@@ -204,24 +186,24 @@ public class GamePanel extends JPanel{
     
     
 
-    public static void updateGrid(String example) {
-        ArrayList<Letter> word = new ArrayList<>();
-        for (int i = 0; i < example.length(); i++) {
-            Letter letter = new Letter(example.charAt(i));
-            word.add(letter);
-        }
+    // public static void updateGrid(String example) {
+    //     ArrayList<Letter> word = new ArrayList<>();
+    //     for (int i = 0; i < example.length(); i++) {
+    //         Letter letter = new Letter(example.charAt(i));
+    //         word.add(letter);
+    //     }
 
-        System.out.println(word);
+    //     System.out.println(word);
 
-        int index = 0;
-        for (int col = 0; col < COL; col++) {
-                grid[OFFSET][col] = word.get(index);
-                index++;
-        }
-        OFFSET++;
-        printGrid(grid);
+    //     int index = 0;
+    //     for (int col = 0; col < COL; col++) {
+    //             grid[OFFSET][col] = word.get(index);
+    //             index++;
+    //     }
+    //     OFFSET++;
+    //     printGrid(grid);
 
-    }
+    // }
 
     // outputs Grid to Console
     public static void printGrid(Letter[][] grid) {
@@ -235,7 +217,7 @@ public class GamePanel extends JPanel{
 
     public void drawKeyboard(Graphics g) {
     SIZE = Math.min((WIDTH * 7 / 16) / COL, (HEIGHT * 7 / 16) / ROW);
-    int gap = 5;
+    // int gap = 5;
 
     for (int row = 0; row < keyboard.table.size(); row++) {
         int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * (SIZE + gap));
@@ -248,13 +230,13 @@ public class GamePanel extends JPanel{
             g.drawRect(posX, posY, SIZE, SIZE);
 
             // Get font metrics
-            FontMetrics fm = g.getFontMetrics(font);
+            FontMetrics fm = g.getFontMetrics(new Font("Arial", Font.BOLD, 24));
 
             // Calculate the position to center the letter within the box
             int x = posX + (SIZE - fm.stringWidth(letter.getLetter()+"")) / 2;
             int y = posY + (SIZE + fm.getAscent()) / 2;
 
-            g.setFont(font);
+            g.setFont(new Font("Arial", Font.BOLD, 24));
             g.drawString(letter.getLetter()+"", x, y);
 
             posX += SIZE + gap;
@@ -323,16 +305,18 @@ public class GamePanel extends JPanel{
 
         // checks to see if user guessed word in less than 6 guesses 
         if (newGuess.toString().contains("33333")) {
-
-            // incremements guessCount to nullify keyListener
-            guessCount = 6;
             JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
         } else if (guessCount == 6) {
-            JOptionPane.showMessageDialog(null, "Sorry! You lost.", "Game Over", JOptionPane.ERROR_MESSAGE);
+            String missedWord = target.getWord(); // Get the missed word
+            JOptionPane.showMessageDialog(null, "Sorry! You lost. The correct word was: " + missedWord, "Game Over", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public static void backspace(){
         guess.removeLast();
+    }
+
+    public static void clearGuesses() {
+        guesses.clear();
     }
 }

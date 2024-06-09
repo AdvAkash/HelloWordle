@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Keyboard {
 
-	public ArrayList<ArrayList<Letter>> table = new ArrayList<ArrayList<Letter>>();
+	public static ArrayList<ArrayList<Letter>> table = new ArrayList<ArrayList<Letter>>();
 	private String[] keyBoard = {"QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"};
 	
 	public Keyboard() {
@@ -37,5 +37,13 @@ public class Keyboard {
 			output += "\n"; 
 		}
 		return output; 
+	}
+
+	public static void clearKeys() {
+		for (ArrayList<Letter> row : table) {
+			for (Letter letter : row) {
+				letter.changeState(0); // Reset the state of each letter to 0
+			}
+		}
 	}
 }
