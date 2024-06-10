@@ -9,6 +9,20 @@ public class Main extends JFrame {
 	public static double width;
 	public static double height;
 
+	/* Toggle for trick mode
+	 * 0 - Regular
+	 * 1 - Trick
+	 */
+	public static int trick = 0;
+
+	/* Difficulty of game
+	 * 0 - Easy
+	 * 1 - Hard
+	 */
+	public static int diff = 0;
+	public static int trickGuess = 7;
+
+
 	private JPanel gamePanel; 
 
 	public static void main(String[] args) {
@@ -55,7 +69,6 @@ public class Main extends JFrame {
 		JMenuItem restart = new JMenuItem("Restart");
 		restart.setMnemonic('R');
 		restart.addActionListener(new ActionListener() {
-			
 			@Override
             public void actionPerformed(ActionEvent e) {
 				System.out.println("HERE");
@@ -63,12 +76,13 @@ public class Main extends JFrame {
             }
         });
 
-		JMenuItem difficultyItem = new JMenuItem("Easy", 'R');
+		JMenuItem difficultyItem = new JMenuItem("Easy", 'E');
 		difficultyMenu.add(difficultyItem);
 		difficultyItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Call the setRegularMode method in the GamePanel class
+				Main.diff = 0;
 				try {
 					System.out.println("HERE");
             		GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
@@ -78,12 +92,13 @@ public class Main extends JFrame {
 			}
         });
 
-		difficultyItem = new JMenuItem("Hard", 'T');
+		difficultyItem = new JMenuItem("Hard", 'H');
 		difficultyMenu.add(difficultyItem);
-		difficultyItem .addActionListener(new ActionListener() {
+		difficultyItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Call the setRegularMode method in the GamePanel class
+				Main.diff = 1;
 				try {
             		GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("dictionary.txt"));
         		} catch (IOException ex) {
@@ -94,8 +109,23 @@ public class Main extends JFrame {
 
 		JMenuItem modeItem = new JMenuItem("Regular", 'R');
 		modeMenu.add(modeItem);
+		modeItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+				Main.trick = 0;
+			}
+        });
+
+
 		modeItem = new JMenuItem("Trick", 'T');
 		modeMenu.add(modeItem);
+		modeItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+				Main.trick = 1;
+				Main.trickGuess = (int)(Math.random()*6)+1;
+			}
+        });
 
 		menu.add(difficultyMenu);
 		menu.add(modeMenu);

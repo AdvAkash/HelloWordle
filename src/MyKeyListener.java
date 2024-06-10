@@ -1,5 +1,6 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class MyKeyListener implements KeyListener {
 
@@ -24,6 +25,17 @@ public class MyKeyListener implements KeyListener {
                     GamePanel.guess.addLetter(typedChar);
                 } catch (Exception ex) {
                     System.out.println("Not a letter, try any of the following:\nA B C D E F\nG H I J K L M\nN O P Q R S\nT U V W X Y Z");
+                }
+                if(Main.trick == 1 && GamePanel.guessCount == Main.trickGuess){
+                    try {
+                        if(Main.diff == 0){
+                            GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
+                        }else{
+                            GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("dictionary.txt"));
+                        }
+                    } catch (IOException e1) {
+                        System.out.println("Didn't get new word");
+                    }
                 }
             }
         }

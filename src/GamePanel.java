@@ -219,11 +219,11 @@ public class GamePanel extends JPanel {
     SIZE = Math.min((WIDTH * 7 / 16) / COL, (HEIGHT * 7 / 16) / ROW);
     // int gap = 5;
 
-    for (int row = 0; row < keyboard.table.size(); row++) {
-        int posX = (WIDTH / 2) - (int) ((((double) (keyboard.table.get(row).size())) / 2.0) * (SIZE + gap));
-        int posY = HEIGHT - (SIZE + gap) * (keyboard.table.size() - row);
+    for (int row = 0; row < Keyboard.table.size(); row++) {
+        int posX = (WIDTH / 2) - (int) ((((double) (Keyboard.table.get(row).size())) / 2.0) * (SIZE + gap));
+        int posY = HEIGHT - (SIZE + gap) * (Keyboard.table.size() - row);
 
-        for (Letter letter : keyboard.table.get(row)) {
+        for (Letter letter : Keyboard.table.get(row)) {
             g.setColor(letter.getColor());
             g.fillRect(posX, posY, SIZE, SIZE);
             g.setColor(Color.BLACK);
@@ -309,6 +309,10 @@ public class GamePanel extends JPanel {
         } else if (guessCount == 6) {
             String missedWord = target.getWord(); // Get the missed word
             JOptionPane.showMessageDialog(null, "Sorry! You lost. The correct word was: " + missedWord, "Game Over", JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (GamePanel.guessCount == Main.trickGuess){
+            JOptionPane.showMessageDialog(null, "Word Changed! You have " + (6-Main.trickGuess) + " more guesses!\nThe keyboard will only update the new letters you guess!\nThe previous guesses can now be ignored!\nGood luck!", "Word Changed", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
