@@ -113,6 +113,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 				Main.trick = 1;
+				JOptionPane.showMessageDialog(null, "Trick mode enabled!", "Trick Mode", JOptionPane.INFORMATION_MESSAGE);
 				restartGame();
 			}
         });

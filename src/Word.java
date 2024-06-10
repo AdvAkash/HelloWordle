@@ -46,12 +46,12 @@ public class Word {
 			for (Letter goal : target.getLetters()) {
 				
 				if (letter.getLetter() == goal.getLetter()) {
-					if (posLetter == pos){
+					if((posLetter == pos)){
 						letter.changeState(3);
-					}else {
+						break;
+					}else {//(posLetter == pos){
 						letter.changeState(2);
 					}
-					break;
 				}else {
 					letter.changeState(1);
 				}
