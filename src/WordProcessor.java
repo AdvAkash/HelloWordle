@@ -17,11 +17,11 @@ public class WordProcessor {
                     writer.println(word.toUpperCase());
                 }
             }
-            System.out.println("Processing complete. Check " + outputFileName + " for results.");
+            System.out.println("Done");
         } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + inputFileName);
+            System.err.println("File not found");
         } catch (IOException e) {
-            System.err.println("Error writing to file: " + outputFileName);
+            System.err.println("Didn't write");
         }
     }
 }
