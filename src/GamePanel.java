@@ -140,8 +140,9 @@ public class GamePanel extends JPanel {
 
     public void drawGridOfLetters(Graphics g) {
         SIZE = Math.min((WIDTH * 9 / 16) / COL, (HEIGHT * 9 / 16) / ROW);
-        int totalGridWidth = COL * SIZE;
-        int totalGridHeight = 3*(SIZE+gap);//ROW * SIZE;
+        int keySize = Math.min((WIDTH * 7 / 16) / COL, (HEIGHT * 7 / 16) / ROW);
+        int totalGridWidth = COL * (SIZE + gap);
+        int totalGridHeight = ROW * SIZE;
         int x;
         int y;
         int row;
@@ -152,15 +153,14 @@ public class GamePanel extends JPanel {
         // Subtract width/height of GUI by width/height of grid
         // Divide values by 2 to center the grid
         int posX = (WIDTH - totalGridWidth) / 2;
-        int posY = //g.getFontMetrics(titleFont).getHeight()+0; (HEIGHT - totalGridHeight) / 2;
-        (totalGridHeight-g.getFontMetrics( new Font("Arial", Font.BOLD, 72)).getHeight());
+        int posY = (((HEIGHT - 3 * keySize) - (g.getFontMetrics(new Font("Arial", Font.BOLD, 72)).getHeight()))/2)-(3*SIZE);
         for (row = 0; row < guesses.size(); row++) {
             for (col = 0; col < 5; col++) {
                 g.setFont(new Font("Arial", Font.BOLD, 24));
     
                 // Calculates the position with gap
                 x = posX + col * (SIZE + gap);
-                y = posY + row * (SIZE + gap);
+                y = posY + row * (SIZE + gap)+50;
     
                 // Draws the black outline
                 g.setColor(guesses.get(row).getLetters().get(col).getColor());
@@ -182,7 +182,7 @@ public class GamePanel extends JPanel {
         }
     
         // Draw the current guess
-        y = posY + (row) * (SIZE + gap);
+        y = posY + row * (SIZE + gap)+50;
         letterY = y + SIZE / 2;
         for (col = 0; col < guess.getLetters().size(); col++) {
             x = posX + col * (SIZE + gap);

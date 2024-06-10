@@ -147,7 +147,7 @@ public class Main extends JFrame {
 			}
 		}
 		if (Main.trick == 1){
-			Main.trickGuess = (int)(Math.random()*6)+1;
+			Main.trickGuess = (int)(Math.random()*3)+1;
 		}else{
 			Main.trickGuess = 7;
 		}
