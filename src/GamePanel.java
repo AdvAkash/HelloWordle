@@ -21,6 +21,8 @@ public class GamePanel extends JPanel {
     public static int SIZE;
     public static int WIDTH; 
     public static int HEIGHT;
+
+    // could delete
     private int gap = 5;
 
     public GamePanel() {
@@ -140,7 +142,6 @@ public class GamePanel extends JPanel {
         SIZE = Math.min((WIDTH * 9 / 16) / COL, (HEIGHT * 9 / 16) / ROW);
         int keySize = Math.min((WIDTH * 7 / 16) / COL, (HEIGHT * 7 / 16) / ROW);
         int totalGridWidth = COL * (SIZE + gap);
-        int totalGridHeight = ROW * SIZE;
         int x;
         int y;
         int row;
@@ -232,6 +233,7 @@ public class GamePanel extends JPanel {
 
     public void drawKeyboard(Graphics g) {
     SIZE = Math.min((WIDTH * 7 / 16) / COL, (HEIGHT * 7 / 16) / ROW);
+    // int gap = 5;
 
     for (int row = 0; row < Keyboard.table.size(); row++) {
         int posX = (WIDTH / 2) - (int) ((((double) (Keyboard.table.get(row).size())) / 2.0) * (SIZE + gap));
@@ -333,7 +335,6 @@ public class GamePanel extends JPanel {
     }
 
     public static void restartGame() {
-
         // Reset the game state here
         // Reset guesses and guess count
 		GamePanel.clearGuesses();
