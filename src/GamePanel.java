@@ -309,9 +309,7 @@ public class GamePanel extends JPanel {
         } else if (guessCount == 6) {
             String missedWord = target.getWord(); // Get the missed word
             JOptionPane.showMessageDialog(null, "Sorry! You lost. The correct word was: " + missedWord, "Game Over", JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (GamePanel.guessCount == Main.trickGuess){
+        }else if (GamePanel.guessCount == Main.trickGuess){
             JOptionPane.showMessageDialog(null, "Word Changed! You have " + (6-Main.trickGuess) + " more guesses!\nThe keyboard will only update the new letters you guess!\nThe previous guesses can now be ignored!\nGood luck!", "Word Changed", JOptionPane.INFORMATION_MESSAGE);
         }
     }
