@@ -81,14 +81,8 @@ public class Main extends JFrame {
 		difficultyItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Call the setRegularMode method in the GamePanel class
 				Main.diff = 0;
-				try {
-					System.out.println("HERE");
-            		GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
-        		} catch (IOException ex) {
-            		System.out.println("ERROR");
-        		}	
+				restartGame();
 			}
         });
 
@@ -97,13 +91,8 @@ public class Main extends JFrame {
 		difficultyItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Call the setRegularMode method in the GamePanel class
 				Main.diff = 1;
-				try {
-            		GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("dictionary.txt"));
-        		} catch (IOException ex) {
-            		System.out.println("ERROR");
-        		}	
+            	restartGame();
 			}
         });
 
@@ -113,6 +102,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 				Main.trick = 0;
+				restartGame();
 			}
         });
 
@@ -123,7 +113,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 				Main.trick = 1;
-				Main.trickGuess = (int)(Math.random()*6)+1;
+				restartGame();
 			}
         });
 
@@ -152,6 +142,11 @@ public class Main extends JFrame {
 			} catch (IOException e) {
 				System.out.println("Didn't get new word");
 			}
+		}
+		if (Main.trick == 1){
+			Main.trickGuess = (int)(Math.random()*6)+1;
+		}else{
+			Main.trickGuess = 7;
 		}
 		JOptionPane.showMessageDialog(null, "The game has been restarted with a new word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
         repaint();
