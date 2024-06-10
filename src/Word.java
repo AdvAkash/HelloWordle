@@ -49,7 +49,7 @@ public class Word {
 					if((posLetter == pos)){
 						letter.changeState(3);
 						break;
-					}else {//(posLetter == pos){
+					}else {
 						letter.changeState(2);
 					}
 				}else {
