@@ -323,7 +323,7 @@ public class GamePanel extends JPanel {
         // checks to see if user guessed word in less than 6 guesses 
         if (newGuess.toString().contains("33333")) {
 
-            JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
             restartGame();
         } else if (guessCount == 6) {
             String missedWord = target.getWord(); // Get the missed word
