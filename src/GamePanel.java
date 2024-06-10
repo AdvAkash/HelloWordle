@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.*;
 
@@ -25,6 +26,12 @@ public class GamePanel extends JPanel {
     private int gap = 5;
 
     public GamePanel() {
+
+        try {
+			GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
+		} catch (IOException e) {
+			System.out.println("Didn't get new word");
+		}
         createComponents();
         keyboard = new Keyboard();
         this.addComponentListener(new ComponentAdapter() {
@@ -34,7 +41,17 @@ public class GamePanel extends JPanel {
                 repaint();
 			}
 		});
-        JOptionPane.showMessageDialog(null, "How to play:\nYou have 6 guesses to guess the word\nStart typing to make guess appear\nUse the computer keyboard\nYou guess will be processed after you hit enter\n\nNote:\nYour guess does not need to be a real word,\nbut then you guarantee that you will not guess the word correctly in that attempt." , "Game Started", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, 
+        "How to Play:\n" +
+        "1. You have 6 guesses to figure out the word.\n" +
+        "2. Start typing to make your guess appear.\n" +
+        "3. Use the computer keyboard for input.\n" +
+        "4. Your guess will be processed after you hit Enter.\n\n" +
+        "Note:\n" +
+        "Your guess does not need to be a real word," +
+        "but guessing a non-word guarantees you will \n not guess the word correctly in that attempt.",
+        "Game Started",
+        JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void setTargetWord(String word) {
@@ -310,7 +327,8 @@ public class GamePanel extends JPanel {
             String missedWord = target.getWord(); // Get the missed word
             JOptionPane.showMessageDialog(null, "Sorry! You lost. The correct word was: " + missedWord, "Game Over", JOptionPane.ERROR_MESSAGE);
         }else if (GamePanel.guessCount == Main.trickGuess){
-            JOptionPane.showMessageDialog(null, "Word Changed! You have " + (6-Main.trickGuess) + " more guesses!\nThe keyboard will only update the new letters you guess!\nThe previous guesses can now be ignored!\nGood luck!", "Word Changed", JOptionPane.INFORMATION_MESSAGE);
+            Keyboard.clearKeys();
+            JOptionPane.showMessageDialog(null, "Word Changed! You have " + (6-Main.trickGuess) + " more guesses!\nThe previous guesses can now be ignored!\nGood luck!", "Word Changed", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
