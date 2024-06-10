@@ -3,6 +3,7 @@ import java.awt.Color;
 public class Letter {
 	
 	private char letter;
+	
 	/*
 	 * 0 - not attempted
 	 * 1 - not in word

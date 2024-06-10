@@ -11,6 +11,7 @@ public class WordProcessor {
 
             while (scanner.hasNext()) {
                 String word = scanner.next();
+                
                 // Remove punctuation and keep only 5-letter words
                 word = word.replaceAll("[^a-zA-Z]", "");
                 if (word.length() == 5) {

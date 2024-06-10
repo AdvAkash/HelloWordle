@@ -47,7 +47,7 @@ public class Main extends JFrame {
 		gamePanel.setBounds(0, 0, WIDTH, HEIGHT);
 		this.add(gamePanel);
 
-        // Set this JFrame to be visible
+        // Sets this JFrame to be visible
         this.setVisible(true);
         System.out.println("All done creating our frame");
 
@@ -55,10 +55,11 @@ public class Main extends JFrame {
 
 	private void addMenuBar() {
 		JMenuBar bar = new JMenuBar();
-		// Add the menu bar to the JFrame
+
+		// Adds the menu bar to the JFrame
 		this.setJMenuBar(bar);
 	
-		// Add more top-level menu options for the specific animation panel
+		// Adds more top-level menu options for the specific animation panel
 		JMenu menu = new JMenu("Options");
 		menu.setMnemonic('O');
 	
@@ -72,7 +73,7 @@ public class Main extends JFrame {
 			@Override
             public void actionPerformed(ActionEvent e) {
 				System.out.println("HERE");
-                restartGame(); // Call restartGame method when the button is clicked
+                restartGame();
             }
         });
 
@@ -126,8 +127,9 @@ public class Main extends JFrame {
 	}
 
 	public void restartGame() {
-        // Reset the game state here
-        // Reset guesses and guess count
+
+        // Resets the game state here
+        // Resets guesses and guess count
 		GamePanel.clearGuesses();
 		GamePanel.guessCount = 0;
 		Keyboard.clearKeys();

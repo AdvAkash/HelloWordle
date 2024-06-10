@@ -9,6 +9,7 @@ public class MyKeyListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        
         // Handle key-typed events (e.g., when the user types a character)
         if (GamePanel.guessCount < 6) {
             char typedChar = e.getKeyChar();

@@ -42,7 +42,7 @@ public class Keyboard {
 	public static void clearKeys() {
 		for (ArrayList<Letter> row : table) {
 			for (Letter letter : row) {
-				letter.changeState(0); // Reset the state of each letter to 0
+				letter.changeState(0);
 			}
 		}
 	}
