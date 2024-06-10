@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {
                 repaint();
 			}
 		});
-
+        JOptionPane.showMessageDialog(null, "How to play:\nYou have 6 guesses to guess the word\nStart typing to make guess appear\nUse the computer keyboard\nYou guess will be processed after you hit enter\n\nNote:\nYour guess does not need to be a real word,\nbut then you guarantee that you will not guess the word correctly in that attempt." , "Game Started", JOptionPane.ERROR_MESSAGE);
     }
 
     public static void setTargetWord(String word) {
