@@ -134,12 +134,14 @@ public class Main extends JFrame {
 		if(Main.diff == 0){
 			try {
 				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
+				JOptionPane.showMessageDialog(null, "The game has been restarted with an easy word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
 			} catch (IOException e) {
 				System.out.println("Didn't get new word");
 			}
 		}else{
 			try {
 				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("dictionary.txt"));
+				JOptionPane.showMessageDialog(null, "The game has been restarted with a hard word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
 			} catch (IOException e) {
 				System.out.println("Didn't get new word");
 			}
@@ -149,7 +151,6 @@ public class Main extends JFrame {
 		}else{
 			Main.trickGuess = 7;
 		}
-		JOptionPane.showMessageDialog(null, "The game has been restarted with a new word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
         repaint();
     }
 

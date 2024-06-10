@@ -322,7 +322,7 @@ public class GamePanel extends JPanel {
 
         // checks to see if user guessed word in less than 6 guesses 
         if (newGuess.toString().contains("33333")) {
-            
+
             JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.ERROR_MESSAGE);
             restartGame();
         } else if (guessCount == 6) {
@@ -344,12 +344,14 @@ public class GamePanel extends JPanel {
 		if(Main.diff == 0){
 			try {
 				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
+				JOptionPane.showMessageDialog(null, "The game has been restarted with an easy word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
 			} catch (IOException e) {
 				System.out.println("Didn't get new word");
 			}
 		}else{
 			try {
 				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("dictionary.txt"));
+				JOptionPane.showMessageDialog(null, "The game has been restarted with a hard word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
 			} catch (IOException e) {
 				System.out.println("Didn't get new word");
 			}
@@ -359,7 +361,6 @@ public class GamePanel extends JPanel {
 		}else{
 			Main.trickGuess = 7;
 		}
-		JOptionPane.showMessageDialog(null, "The game has been restarted with a new word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void backspace(){
