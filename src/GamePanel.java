@@ -9,7 +9,7 @@ public class GamePanel extends JPanel {
 
     
     
-    public static Word target;
+    public static Word target = new Word("Hello");
 	public static Word guess = new Word();
     public static int guessCount = 0;
     private static ArrayList<Word> guesses = new ArrayList<>();
@@ -322,14 +322,44 @@ public class GamePanel extends JPanel {
 
         // checks to see if user guessed word in less than 6 guesses 
         if (newGuess.toString().contains("33333")) {
-            JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            
+            JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game Over", JOptionPane.ERROR_MESSAGE);
+            restartGame();
         } else if (guessCount == 6) {
             String missedWord = target.getWord(); // Get the missed word
             JOptionPane.showMessageDialog(null, "Sorry! You lost. The correct word was: " + missedWord, "Game Over", JOptionPane.ERROR_MESSAGE);
+            restartGame();
         }else if (GamePanel.guessCount == Main.trickGuess){
             Keyboard.clearKeys();
             JOptionPane.showMessageDialog(null, "Word Changed! You have " + (6-Main.trickGuess) + " more guesses!\nThe previous guesses can now be ignored!\nGood luck!", "Word Changed", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    public static void restartGame() {
+        // Reset the game state here
+        // Reset guesses and guess count
+		GamePanel.clearGuesses();
+		GamePanel.guessCount = 0;
+		Keyboard.clearKeys();
+		if(Main.diff == 0){
+			try {
+				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
+			} catch (IOException e) {
+				System.out.println("Didn't get new word");
+			}
+		}else{
+			try {
+				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("dictionary.txt"));
+			} catch (IOException e) {
+				System.out.println("Didn't get new word");
+			}
+		}
+		if (Main.trick == 1){
+			Main.trickGuess = (int)(Math.random()*6)+1;
+		}else{
+			Main.trickGuess = 7;
+		}
+		JOptionPane.showMessageDialog(null, "The game has been restarted with a new word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void backspace(){
