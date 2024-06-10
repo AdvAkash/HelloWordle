@@ -53,7 +53,9 @@ public class Word {
 						letter.changeState(2);
 					}
 				}else {
-					letter.changeState(1);
+					if (letter.getState() != 2 && letter.getState() != 3){
+						letter.changeState(1);
+					}
 				}
 				pos++;
 			}
