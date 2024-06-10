@@ -140,6 +140,19 @@ public class Main extends JFrame {
 		GamePanel.clearGuesses();
 		GamePanel.guessCount = 0;
 		Keyboard.clearKeys();
+		if(Main.diff == 0){
+			try {
+				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("sampleDictionary.txt"));
+			} catch (IOException e) {
+				System.out.println("Didn't get new word");
+			}
+		}else{
+			try {
+				GamePanel.setTargetWord(DictionaryScraper.pickRandomWord("dictionary.txt"));
+			} catch (IOException e) {
+				System.out.println("Didn't get new word");
+			}
+		}
         repaint();
     }
 
