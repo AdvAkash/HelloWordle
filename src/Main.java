@@ -152,7 +152,8 @@ public class Main extends JFrame {
 			} catch (IOException e) {
 				System.out.println("Didn't get new word");
 			}
-		}JOptionPane.showMessageDialog(null, "The game has been restarted with a new word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
+		}
+		JOptionPane.showMessageDialog(null, "The game has been restarted with a new word.", "Restarted", JOptionPane.INFORMATION_MESSAGE);
         repaint();
     }
 
